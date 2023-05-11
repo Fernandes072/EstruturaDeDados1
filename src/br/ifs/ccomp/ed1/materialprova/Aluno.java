@@ -30,4 +30,19 @@ public class Aluno {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	public String toString() {
+		return "Matrícula: "+matricula+" / "+"Nome: "+nome;
+	}
+	
+	public boolean equals(Object obj) {
+		boolean retorno = false;
+		if (obj != null && obj instanceof Aluno) {
+			Aluno aluno = (Aluno) obj;
+			if (matricula == aluno.getMatricula() && nome.equals(aluno.getNome())) {
+				retorno = true;
+			}
+		}
+		return retorno;
+	}
 }

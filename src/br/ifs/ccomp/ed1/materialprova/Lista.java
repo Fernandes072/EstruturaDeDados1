@@ -7,4 +7,10 @@ public interface Lista<T> {
 	public T pega(int posicao);
 	public void remove(int posicao);
 	public int tamanho();
+	public void limpa();
+	public int buscaPrimeira(T elemento);
+	public int buscaUltima(T elemento);
+	public void remove(T elemento);
+	public void copia(Lista<T> lista);
+	public boolean igual(Lista<T> lista);
 }

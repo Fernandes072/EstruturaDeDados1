@@ -22,23 +22,78 @@ public class ListaArranjo<T> implements Lista<T> {
 		arranjo[posicao] = elemento;
 		quantidade++;
 	}
-
-	@Override
+	
+	@SuppressWarnings("unchecked")
 	public T pega(int posicao) {
-		// TODO Auto-generated method stub
-		return null;
+		if (posicao>=arranjo.length) {
+			return null;
+		}
+		return (T) arranjo[posicao];
 	}
 
-	@Override
 	public void remove(int posicao) {
-		// TODO Auto-generated method stub
-		
+		if (posicao < quantidade) {
+			for (int i = posicao; i < quantidade; i++) {
+				arranjo[i] = arranjo[i+1];
+			}
+			quantidade--;
+		}
+	}
+	
+	public int tamanho() {
+		return quantidade;
+	}
+	
+	public void limpa() {
+		for (int i = 0; i < quantidade; i++) {
+			arranjo[i] = null;
+		}
+		quantidade = 0;
+	}
+	
+	public int buscaPrimeira(T elemento) {
+		for (int i = 0; i < quantidade; i++) {
+			if (elemento.equals(arranjo[i])) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
-	@Override
-	public int tamanho() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int buscaUltima(T elemento) {
+		int posicao = -1;
+		for (int i = 0; i < quantidade; i++) {
+			if (elemento.equals(arranjo[i])) {
+				posicao = i;
+			}
+		}
+		return posicao;
+	}
+
+	public void remove(T elemento) {
+		for (int i = 0; i < quantidade; i++) {
+			if (elemento.equals(arranjo[i])) {
+				remove(i);
+			}
+		}
+	}
+	
+	public void copia(Lista<T> lista) {
+		for (int i = 0; i < lista.tamanho(); i++) {
+			adiciona(lista.pega(i));
+		}
+	}
+
+	public boolean igual(Lista<T> lista) {
+		if (quantidade != lista.tamanho()) {
+			return false;
+		}
+		for (int i = 0; i < quantidade; i++) {
+			if (pega(i).equals(lista.pega(i)) == false) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public void garanteEspaco() {
