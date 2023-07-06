@@ -18,7 +18,6 @@ public class Teste {
 		lista.adiciona(new Aluno("Raimundo", 2f));
 		System.out.println(lista);
 		
-		lista.segmento(15, 4);
-		System.out.println(lista.segmento(15, 4));
+		System.out.println(lista.buscaBinaria(new Aluno("Jessica", 7f)));
 	}
 }

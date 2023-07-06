@@ -69,6 +69,35 @@ public class ListaOrdenada implements Lista {
 		return posicao;
 	}
 	
+	public int buscaOrdenada(Object elemento) {
+		Comparable obj = (Comparable) elemento;
+		for (int i = 0; i < quantidade; i++) {
+			if (obj.compareTo(arranjo[i]) == 0) {
+				return i;
+			} else if(obj.compareTo(arranjo[i]) == -1){
+				break;
+			}
+		}
+		return -1;
+	}
+	
+	public int buscaBinaria(Object elemento) {
+		int esq = 0;
+		int dir = quantidade - 1;
+		Comparable obj = (Comparable) elemento;
+		while(esq <= dir) {
+			int meio = (int) (esq+dir)/2;
+			if(obj.compareTo(arranjo[meio]) == 0) {
+				return meio;
+			} else if(obj.compareTo(arranjo[meio]) == -1) {
+				dir = meio - 1;
+			} else {
+				esq = meio + 1;
+			}
+		}
+		return -1;
+	}
+	
 	//Esse retorna o primeiro objeto igual
 	public int buscaPrimeiro(Object elemento) {
 		Comparable obj = (Comparable) elemento;
