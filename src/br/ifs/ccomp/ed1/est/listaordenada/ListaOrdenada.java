@@ -209,7 +209,6 @@ public class ListaOrdenada implements Lista {
 		if (inicio >= 0 && fim >= inicio && fim < quantidade) {
 			Lista listaParte = new ListaOrdenada();
 			for (int i = inicio; i < fim; i++) {
-				System.out.println(arranjo[i]);
 				listaParte.adiciona(arranjo[i]);
 			}
 			return listaParte;

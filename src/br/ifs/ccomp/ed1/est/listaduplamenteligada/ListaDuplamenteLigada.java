@@ -155,16 +155,45 @@ public class ListaDuplamenteLigada implements Lista {
 		quantidade = 0;
 	}
 
-	@Override
 	public void substitui(int posicao, Object elemento) {
-		// TODO Auto-generated method stub
-
+		if (posicaoOcupada(posicao)) {
+			Celula novaCelula = new Celula(elemento);
+			Celula celula = pegaCelula(posicao);
+			if (posicao == 0) {
+				Celula proxima = celula.getProximo();
+				novaCelula.setProximo(proxima);
+				proxima.setAnterior(novaCelula);
+				inicio = novaCelula;
+			} else if (posicao == quantidade - 1) {
+				Celula anterior = celula.getAnterior();
+				novaCelula.setAnterior(anterior);
+				anterior.setProximo(novaCelula);
+				fim = novaCelula;
+			} else {
+				Celula proxima = celula.getProximo();
+				Celula anterior = celula.getAnterior();
+				anterior.setProximo(novaCelula);
+				novaCelula.setAnterior(anterior);
+				proxima.setAnterior(novaCelula);
+				novaCelula.setProximo(proxima);
+			}
+		}
 	}
 
-	@Override
 	public void inverte() {
-		// TODO Auto-generated method stub
-
+		Celula guarda = inicio;
+		inicio = fim;
+		Celula celula = fim;
+		while(celula != null) {
+			celula.setProximo(celula.getAnterior());
+			celula = celula.getAnterior();
+		}
+		fim = guarda;
+		celula = fim;
+		while(celula != null) {
+			fim.setAnterior(celula.getProximo());
+			celula = celula.getProximo();
+		}
 	}
 	
 	private int ocorrencias(Object chave) {
@@ -204,15 +233,29 @@ public class ListaDuplamenteLigada implements Lista {
 		}
 	}
 
-	@Override
 	public boolean igual(Lista lista) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean resultado = false;
+		if (quantidade == lista.tamanho()) {
+			resultado = true;
+			for (int i = 0; i < quantidade; i++) {
+				if (!pega(i).equals(lista.pega(i))) {
+					return false;
+				}
+			}
+		}
+		return resultado;
 	}
 
-	@Override
 	public Lista segmento(int inicio, int fim) {
-		// TODO Auto-generated method stub
+		if (inicio >= 0 && fim >= inicio && fim < quantidade) {
+			Celula celula = pegaCelula(inicio);
+			Lista novaLista = new ListaDuplamenteLigada();
+			for (int i = inicio; i < fim; i++) {
+				novaLista.adiciona(celula.getElemento());
+				celula = celula.getProximo();
+			}
+			return novaLista;
+		}
 		return null;
 	}
 
