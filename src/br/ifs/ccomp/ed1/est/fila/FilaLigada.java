@@ -26,11 +26,15 @@ public class FilaLigada implements Fila {
 	public Object remove() {
 		if (!vazia()) {
 			Celula celula = inicio;
-			inicio = inicio.getProxima();
-			inicio.setAnterior(null);
+			if (quantidade == 1) {
+				inicio = null;
+				fim = null;
+			} else {
+				inicio = inicio.getProxima();
+				inicio.setAnterior(null);
+			}
 			quantidade--;
 			return celula.getElemento();
-			
 		}
 		return null;
 	}

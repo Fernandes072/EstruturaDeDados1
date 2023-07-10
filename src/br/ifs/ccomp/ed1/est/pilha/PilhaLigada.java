@@ -24,9 +24,14 @@ public class PilhaLigada implements Pilha {
 	public Object remove() {
 		if (quantidade > 0) {
 			Celula celula = fim;
-			Celula anterior = celula.getAnterior();
-			anterior.setProxima(null);
-			fim = anterior;
+			if (quantidade == 1) {
+				inicio = null;
+				fim = null;
+			} else {
+				Celula anterior = celula.getAnterior();
+				anterior.setProxima(null);
+				fim = anterior;
+			}
 			quantidade--;
 			return celula.getElemento();
 		}
